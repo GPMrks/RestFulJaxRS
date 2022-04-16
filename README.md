@@ -1,1 +1,1 @@
-# RestFulJaxRS
+# Soldier API
