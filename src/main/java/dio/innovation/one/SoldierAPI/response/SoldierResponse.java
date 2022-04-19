@@ -1,25 +1,24 @@
-package dio.innovation.one.SoldierAPI.dto;
+package dio.innovation.one.SoldierAPI.response;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.hateoas.RepresentationModel;
 
-@Entity
-public class Soldier {
+public class SoldierResponse extends RepresentationModel<SoldierResponse> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Column(name = "nome")
     private String name;
-
-    @Column(name = "raça")
     private String race;
-
-    @Column(name = "arma")
     private String weapon;
+    private String status;
 
+    @JsonProperty("id")
     public Long getId() {
         return id;
+    }
+
+    @JsonProperty("id")
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -44,5 +43,13 @@ public class Soldier {
 
     public void setWeapon(String weapon) {
         this.weapon = weapon;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

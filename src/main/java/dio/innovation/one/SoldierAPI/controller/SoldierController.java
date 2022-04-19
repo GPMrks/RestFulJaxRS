@@ -1,6 +1,8 @@
 package dio.innovation.one.SoldierAPI.controller;
 
-import dio.innovation.one.SoldierAPI.dto.Soldier;
+import dio.innovation.one.SoldierAPI.entity.Soldier;
+import dio.innovation.one.SoldierAPI.response.SoldierListResponse;
+import dio.innovation.one.SoldierAPI.response.SoldierResponse;
 import dio.innovation.one.SoldierAPI.service.SoldierService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +21,15 @@ public class SoldierController {
     }
 
     @GetMapping("/v1/soldier")
-    public List<Soldier> getAll() {
-        return soldierService.getAll();
+    public ResponseEntity<List<SoldierListResponse>> getAll() {
+        List<SoldierListResponse> soldierListResponses = soldierService.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(soldierListResponses);
     }
 
     @GetMapping("/v1/soldier/{id}")
-    public ResponseEntity<Soldier> getSoldier(@PathVariable("id") Long id) {
-        final Soldier soldier = soldierService.getSoldier(id);
-        return ResponseEntity.ok(soldier);
+    public ResponseEntity<SoldierResponse> getSoldier(@PathVariable("id") Long id) {
+        SoldierResponse soldierResponse = soldierService.getSoldier(id);
+        return ResponseEntity.status(HttpStatus.OK).body(soldierResponse);
     }
 
     @PostMapping("/v1/soldier")
