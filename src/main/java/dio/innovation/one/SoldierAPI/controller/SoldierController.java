@@ -4,6 +4,7 @@ import dio.innovation.one.SoldierAPI.entity.Soldier;
 import dio.innovation.one.SoldierAPI.response.SoldierListResponse;
 import dio.innovation.one.SoldierAPI.response.SoldierResponse;
 import dio.innovation.one.SoldierAPI.service.SoldierService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,8 +48,9 @@ public class SoldierController {
 
     @DeleteMapping("/v1/soldier/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteSoldier(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteSoldier(@PathVariable("id") Long id) {
         soldierService.deleteSoldier(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }

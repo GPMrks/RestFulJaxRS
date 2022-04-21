@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilderDslKt.withRel;
 
 @Component
 public class SoldierResource {
@@ -23,7 +24,8 @@ public class SoldierResource {
         SoldierListResponse soldierListResponse = objectMapper.convertValue(soldier, SoldierListResponse.class);
         Link linkSelf = linkTo(methodOn(SoldierController.class).getSoldier(soldier.getId())).withSelfRel();
         Link linkGetCollection = linkTo(methodOn(SoldierController.class).getAll()).withRel("GET - COLLECTION");
-        soldierListResponse.add(linkSelf, linkGetCollection);
+        Link linkDelete = linkTo(methodOn(SoldierController.class).deleteSoldier(soldier.getId())).withRel("DELETE");
+        soldierListResponse.add(linkSelf, linkGetCollection, linkDelete);
         return soldierListResponse;
     }
 
